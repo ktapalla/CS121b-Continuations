@@ -39,9 +39,9 @@ Notice that ``` (factorial n) ``` evaluates the same thing as ``` (Factorial n I
 
 ### Problems to Code 
 
-Code the following procedures as their equivalent procedure, but with explicit continuation: 
+Code the following procedures as their equivalent procedure, but with explicit continuation (the new explicit continuation versions of the procedures below will have the first character of the original method as an uppercase letter in its name): 
 
-1. 
+1. **member? -> Member?**: 
 ``` 
 (define (member? x L) 
     (if (null? L) 
@@ -51,7 +51,7 @@ Code the following procedures as their equivalent procedure, but with explicit c
             (member? x (cdr L))))) 
 ``` 
 
-2. 
+2. **fastexp -> Fastexp**: 
 ``` 
 (define (fastexp b e) 
     (if (= e 0)
@@ -61,7 +61,7 @@ Code the following procedures as their equivalent procedure, but with explicit c
             (* b (fastexp b (- e 1)))))) 
 ``` 
 
-3. 
+3. **fastmult -> Fastmult**: 
 ``` 
 (define (fastmult m n)
     (if (= n 0) 
@@ -71,7 +71,7 @@ Code the following procedures as their equivalent procedure, but with explicit c
             (+ m (fastmult m (- n 1)))))) 
 ``` 
 
-4. 
+4. **map -> Map**: 
 ``` 
 (define (map f L)
     (if (null? L) 
@@ -79,7 +79,7 @@ Code the following procedures as their equivalent procedure, but with explicit c
         (cons (f (car L)) (map f (cdr L))))) 
 ``` 
 
-5. 
+5. **filter -> Filter**: 
 ``` 
 (define (filter pred L) 
     (if (null? L) 
@@ -89,7 +89,7 @@ Code the following procedures as their equivalent procedure, but with explicit c
             (filter pred (cdr L))))) 
 ``` 
 
-6. 
+6. **tack -> Tack**: 
 ``` 
 (define (tack x L) 
     (if (null? L) 
@@ -97,7 +97,7 @@ Code the following procedures as their equivalent procedure, but with explicit c
         (cons (car L) (tack x (cdr L))))) 
 ``` 
 
-7. 
+7. **reverse -> Reverse**: 
 ``` 
 (define (reverse L) 
     (if (null? L) 
@@ -105,7 +105,7 @@ Code the following procedures as their equivalent procedure, but with explicit c
         (tack (car L) (reverse (cdr L))))) 
 ```
 
-8. 
+8. **append -> Append**: 
 ``` 
 (define (append S T) 
     (if (null? S) 
@@ -113,7 +113,7 @@ Code the following procedures as their equivalent procedure, but with explicit c
         (cons (car S) (append (cdr S) T)))) 
 ``` 
 
-9. 
+9. **fib -> Fib**: 
 ``` 
 (define (fib n) 
     (if (< n 2) 
@@ -121,7 +121,7 @@ Code the following procedures as their equivalent procedure, but with explicit c
         (+ (fib (- n 1)) (fib (- n 2))))) 
 ``` 
 
-10. 
+10. **fringe -> Fringe**: 
 ``` 
 (define (fringe S) 
     (if (null? S) 
@@ -131,7 +131,7 @@ Code the following procedures as their equivalent procedure, but with explicit c
             (append (fringe (car S)) (fringe (cdr S)))))) 
 ``` 
 
-11. 
+11. **tag -> Tag**: 
 ``` 
 (define (tag x L) 
     (if (null? L) 
@@ -140,6 +140,8 @@ Code the following procedures as their equivalent procedure, but with explicit c
 ``` 
 
 12. Procedure ``` powerset ``` takes a list of length n, returning one of length 2^n^, containing all the possible sublists of its input, in order, keeping or removing each element. It is the list equivalent of the powerset operation for sets. Remember, if ``` powerset ``` calls ``` tag ``` and ``` append ```, then ``` Powerset ``` calls ``` Tag ``` and ``` Append ```- the same applies for the other following solutions (see *Condition 4* in the **Assignment Instructions** section above). 
+
+**powerset -> Powerset**: 
 ``` 
 (define (powerset S) 
     (if (null? S) 
@@ -149,6 +151,8 @@ Code the following procedures as their equivalent procedure, but with explicit c
 ``` 
 
 13. Procedure ``` cross ``` codes cross products of pairs of elements, one each from its two inputs. 
+
+**cross -> Cross**: 
 ``` 
 (define (cross S T) 
     (if (null? S) 
@@ -157,19 +161,19 @@ Code the following procedures as their equivalent procedure, but with explicit c
             (cross (cdr S) T)))) 
 ``` 
 
-14. 
+14. **largers -> Largers**: 
 ``` 
 (define (largers x L) 
     (filter (lambda (n) (>= n x)) L)) 
 ``` 
 
-15. 
+15. **smallers -> Smallers**: 
 ``` 
 (define (smallers x L) 
     (filter (lambda (n) (< n x)) L)) 
 ``` 
 
-16. 
+16. **quicksort -> Quicksort**: 
 ``` 
 (define (quicksort F) 
     (if (null? F) 
