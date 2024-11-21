@@ -41,70 +41,103 @@ Notice that ``` (factorial n) ``` evaluates the same thing as ``` (Factorial n I
 
 Code the following procedures as their equivalent procedure, but with explicit continuation: 
 
-1. ``` (define (member? x L) 
-            (if (null? L) 
-                #f 
-                (if (equal? x (car L))
-                    #t 
-                    (member? x (cdr L))))) ``` 
+1. 
+``` 
+(define (member? x L) 
+    (if (null? L) 
+        #f 
+        (if (equal? x (car L))
+            #t 
+            (member? x (cdr L))))) 
+``` 
 
-2. ``` (define (fastexp b e) 
-            (if (= e 0)
-                1 
-                (if (even? e)
-                    (square (fastexp b (/ e 2)))
-                    (* b (fastexp b (- e 1)))))) ``` 
+2. 
+``` 
+(define (fastexp b e) 
+    (if (= e 0)
+        1 
+        (if (even? e)
+            (square (fastexp b (/ e 2)))
+            (* b (fastexp b (- e 1)))))) 
+``` 
 
-3. ``` (define (fastmult m n)
-            (if (= n 0) 
-                0 
-                (if (even? n)
-                    (double (fastmult m (/ n 2)))
-                    (+ m (fastmult m (- n 1)))))) ``` 
+3. 
+``` 
+(define (fastmult m n)
+    (if (= n 0) 
+        0 
+        (if (even? n)
+            (double (fastmult m (/ n 2)))
+            (+ m (fastmult m (- n 1)))))) 
+``` 
 
-4. ``` (define (map f L)
-            (if (null? L) 
-                '()
-                (cons (f (car L)) (map f (cdr L))))) ``` 
+4. 
+``` 
+(define (map f L)
+    (if (null? L) 
+        '()
+        (cons (f (car L)) (map f (cdr L))))) 
+``` 
 
-5. ``` (define (filter pred L) 
-            (if (null? L) 
-                '() 
-                (if (pred (car L)) 
-                    (cons (car L) (filter pred (cdr L))) 
-                    (filter pred (cdr L))))) ``` 
+5. 
+``` 
+(define (filter pred L) 
+    (if (null? L) 
+        '() 
+        (if (pred (car L)) 
+            (cons (car L) (filter pred (cdr L))) 
+            (filter pred (cdr L))))) 
+``` 
 
-6. ``` (define (tack x L) 
-            (if (null? L) 
-                (cons x '()) 
-                (cons (car L) (tack x (cdr L))))) ``` 
+6. 
+``` 
+(define (tack x L) 
+    (if (null? L) 
+        (cons x '()) 
+        (cons (car L) (tack x (cdr L))))) 
+``` 
 
-7. ``` (define (reverse L) 
-            (if (null? L) 
-                '() 
-                (tack (car L) (reverse (cdr L))))) ```
+7. 
+``` 
+(define (reverse L) 
+    (if (null? L) 
+        '() 
+        (tack (car L) (reverse (cdr L))))) 
+```
 
-8. ``` (define (append S T) 
-            (if (null? S) 
-                T 
-                (cons (car S) (append (cdr S) T)))) ``` 
+8. 
+``` 
+(define (append S T) 
+    (if (null? S) 
+        T 
+        (cons (car S) (append (cdr S) T)))) 
+``` 
 
-9. ``` (define (fib n) 
-            (if (< n 2) 
-                n 
-                (+ (fib (- n 1)) (fib (- n 2))))) ``` 
+9. 
+``` 
+(define (fib n) 
+    (if (< n 2) 
+        n 
+        (+ (fib (- n 1)) (fib (- n 2))))) 
+``` 
 
-10. ``` (define (fringe S) 
-            (if (null? S) 
-                '() 
-                (if (number? S) 
-                    (list S) 
-                    (append (fringe (car S)) (fringe (cdr S)))))) ``` 
+10. 
+``` 
+(define (fringe S) 
+    (if (null? S) 
+        '() 
+        (if (number? S) 
+            (list S) 
+            (append (fringe (car S)) (fringe (cdr S)))))) 
+``` 
 
-11. ``` (define (tag x L) 
-            (if (null? L) 
-                '() 
-                (cons (cons x (car L)) (tag x (cdr L))))) ``` 
+11. 
+``` 
+(define (tag x L) 
+    (if (null? L) 
+        '() 
+        (cons (cons x (car L)) (tag x (cdr L))))) 
+``` 
 
 12. Procedure ``` powerset ``` takes a list of length n, returning one of length 2^n^, containing all the possible sublists of its input, in order, keeping or removing each element. It is the list equivalent of the powerset operation for sets. Remember, if ``` powerset ``` calls ``` tag ``` and ``` append ```, then ``` Powerset ``` calls ``` Tag ``` and ``` Append ```- the same applies for the other following solutions (see *Condition 4* in the **Assignment Instructions** section above). 
 ``` 
@@ -124,15 +157,24 @@ Code the following procedures as their equivalent procedure, but with explicit c
             (cross (cdr S) T)))) 
 ``` 
 
-14. ``` (define (largers x L) 
-            (filter (lambda (n) (>= n x)) L)) ``` 
+14. 
+``` 
+(define (largers x L) 
+    (filter (lambda (n) (>= n x)) L)) 
+``` 
 
-15. ``` (define (smallers x L) 
-            (filter (lambda (n) (< n x)) L)) ``` 
+15. 
+``` 
+(define (smallers x L) 
+    (filter (lambda (n) (< n x)) L)) 
+``` 
 
-16. ``` (define (quicksort F) 
-            (if (null? F) 
-                '() 
-                (append (quicksort (smallers (car F) (cdr F))) 
-                    (cons (car F) 
-                        (quicksort (largers (car F) (cdr F))))))) ``` 
+16. 
+``` 
+(define (quicksort F) 
+    (if (null? F) 
+        '() 
+        (append (quicksort (smallers (car F) (cdr F))) 
+            (cons (car F) 
+                (quicksort (largers (car F) (cdr F))))))) 
+``` 
